@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPACE-Конструктор: Цифровая Учётная Политика - Презентация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 60px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #60a5fa;
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #93c5fd;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            max-width: 900px;
+        }
+
+        .slide ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .slide li:before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .team {
+            font-size: 2rem;
+            color: #fbbf24;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        .hackathon {
+            font-size: 1.3rem;
+            color: #93c5fd;
+            margin-top: 15px;
+        }
+
+        .slide-counter {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1200px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .feature-card h4 {
+            font-size: 1.8rem;
+            color: #fbbf24;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .architecture {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+            max-width: 1000px;
+            backdrop-filter: blur(10px);
+        }
+
+        .architecture-layer {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            border-left: 4px solid #10b981;
+        }
+
+        .screenshot-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            max-width: 1200px;
+        }
+
+        .screenshot {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-title {
+            color: #1e3a8a;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .screenshot-img {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mock-header {
+            background: #3b82f6;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .mock-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 0.9rem;
+            color: #374151;
+            text-align: left;
+        }
+
+        .mock-button {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .mock-step {
+            background: #60a5fa;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>🏗️ SPACE-Конструктор</h1>
+            <h2>Цифровая Учётная Политика</h2>
+            <p class="hackathon">Хакатон "Лидеры цифровой трансформации 2025"</p>
+            <p class="team">Команда SPACE: Захар Кондратьев, Никита Мусиенко</p>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide">
+            <h2>❗ Проблема</h2>
+            <ul>
+                <li>Формирование учётной политики - трудоёмкий ручной процесс</li>
+                <li>Несоответствия между документами разных организаций</li>
+                <li>Сложность обеспечения соответствия законодательству</li>
+                <li>Отсутствие централизованного механизма обновления</li>
+                <li>Большие временные затраты бухгалтеров</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide">
+            <h2>💡 Решение</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🎯 Автоматизация</h4>
+                    <p>Цифровой конструктор для создания стандартизированных учётных политик</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚙️ Персонализация</h4>
+                    <p>Учёт специфики организации: тип учёта, отрасль, особенности</p>
+                </div>
+                <div class="feature-card">
+                    <h4>✅ Соответствие</h4>
+                    <p>Гарантия соответствия нормативным документам Москвы</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚡ Скорость</h4>
+                    <p>Генерация документа за минуты вместо недель</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Architecture -->
+        <div class="slide">
+            <h2>🏗️ Архитектура</h2>
+            <div class="architecture">
+                <div class="architecture-layer">
+                    <strong>Frontend:</strong> React + TypeScript + Vite + TailwindCSS<br>
+                    Интерактивный мастер, прогрессивный интерфейс
+                </div>
+                <div class="architecture-layer">
+                    <strong>Backend:</strong> Express.js + In-Memory Storage<br>
+                    RESTful API, готовность к интеграции с 1С
+                </div>
+                <div class="architecture-layer">
+                    <strong>Данные:</strong> Стандартизированная учётная политика города Москвы<br>
+                    Разделы с фильтрацией по типу учёта и отрасли
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Features -->
+        <div class="slide">
+            <h2>🌟 Ключевые возможности</h2>
+            <ul>
+                <li>Пошаговый мастер создания учётной политики</li>
+                <li>Автоматический подбор разделов по параметрам организации</li>
+                <li>Поддержка бюджетного и бухгалтерского учёта</li>
+                <li>Отраслевая специфика (ЖКХ, Образование, Транспорт и др.)</li>
+                <li>Мгновенная генерация итогового документа</li>
+                <li>Просмотр и управление созданными политиками</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Demo Screenshots -->
+        <div class="slide">
+            <h2>📱 Демонстрация интерфейса</h2>
+            <div class="screenshot-container">
+                <div class="screenshot">
+                    <div class="screenshot-title">Главная страница</div>
+                    <div class="screenshot-img">
+                        <div class="mock-header">SPACE-Конструктор</div>
+                        <div class="mock-content">
+                            Добро пожаловать в систему создания учётных политик для государственных организаций Москвы
+                        </div>
+                        <div class="mock-button">Создать политику →</div>
+                    </div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-title">Мастер создания (Шаг 1)</div>
+                    <div class="screenshot-img">
+                        <div class="mock-step">Шаг 1 из 4</div>
+                        <div class="mock-content">
+                            Выбор организации:<br>
+                            📋 Департамент природы<br>
+                            📋 Департамент финансов<br>
+                            📋 ГБУ Жилищник района
+                        </div>
+                        <div class="mock-button">Далее →</div>
+                    </div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-title">Применимые разделы (Шаг 2)</div>
+                    <div class="screenshot-img">
+                        <div class="mock-step">Шаг 2 из 4</div>
+                        <div class="mock-content">
+                            Подходящие разделы для вашей организации:<br>
+                            ✓ 1.1. Общие положения<br>
+                            ✓ 1.2. Организация учёта<br>
+                            ✓ 2.1. Учёт активов
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-title">Итоговый документ</div>
+                    <div class="screenshot-img">
+                        <div class="mock-header">Учётная политика #1</div>
+                        <div class="mock-content">
+                            Организация: ГБУ Жилищник<br>
+                            Дата: 02.10.2025<br>
+                            Разделов: 5<br>
+                            Статус: Черновик
+                        </div>
+                        <div class="mock-button">Скачать PDF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Benefits -->
+        <div class="slide">
+            <h2>📊 Преимущества</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>⏱️ Экономия времени</h4>
+                    <p>Сокращение процесса создания учётной политики с недель до минут</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📋 Стандартизация</h4>
+                    <p>Единый подход для всех государственных организаций Москвы</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚖️ Соответствие</h4>
+                    <p>Гарантия актуальности и соответствия законодательству</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔄 Масштабируемость</h4>
+                    <p>Готовность к интеграции с системами 1С и расширению функционала</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Thank You -->
+        <div class="slide">
+            <h1>Спасибо за внимание! 🙏</h1>
+            <p class="hackathon">Хакатон "Лидеры цифровой трансформации 2025"</p>
+            <p class="team">Проект команды SPACE:<br>Захар Кондратьев, Никита Мусиенко</p>
+            <p style="margin-top: 40px; font-size: 1.3rem;">Готовы к внедрению и масштабированию! 🚀</p>
+        </div>
+
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">8</span>
+        </div>
+
+        <div class="navigation">
+            ← → Стрелки | Пробел для продолжения
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideEl = document.getElementById('current-slide');
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            currentSlideEl.textContent = currentSlide + 1;
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+        
+        // Обновляем счётчик
+        document.getElementById('total-slides').textContent = totalSlides;
+    </script>
+</body>
+</html>

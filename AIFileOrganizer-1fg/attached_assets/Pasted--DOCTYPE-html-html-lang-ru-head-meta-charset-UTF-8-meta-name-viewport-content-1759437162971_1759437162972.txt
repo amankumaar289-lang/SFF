@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPACE-Конструктор: Цифровая Учётная Политика</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, rgba(255,0,83,0.05) 0%, rgba(138,131,209,0.05) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF0053 0%, #8A83D1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .team-name {
+            text-align: center;
+            font-size: 18px;
+            color: #8A83D1;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #FF0053 0%, #8A83D1 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,0,83,0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #FF0053;
+            border: 2px solid #FF0053;
+        }
+
+        .btn-secondary:hover {
+            background: #FF0053;
+            color: white;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            color: #FF0053;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .wizard-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #FF0053 0%, #8A83D1 100%);
+            transition: width 0.3s ease;
+        }
+
+        .step-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .step-counter {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #FF0053;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover {
+            border-color: #8A83D1;
+            background: rgba(138,131,209,0.05);
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .radio-option.selected {
+            border-color: #FF0053;
+            background: rgba(255,0,83,0.05);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .result-card {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .result-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+
+        .spinner {
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #8A83D1;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .next-steps {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            font-size: 18px;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .next-steps ul {
+            list-style: none;
+        }
+
+        .next-steps li {
+            color: #6b7280;
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .next-steps li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .center-content {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            h2 { font-size: 24px; }
+            .features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="container">
+            <h1>SPACE-Конструктор</h1>
+            <p class="subtitle">Цифровая Учётная Политика</p>
+            
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 60px; color: #6b7280; font-size: 18px;">
+                Автоматизированное формирование учетной политики для органов исполнительной власти 
+                и государственных учреждений города Москвы
+            </p>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Быстро</h3>
+                    <p>Формирование документа за несколько минут вместо нескольких дней</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <h3>Точно</h3>
+                    <p>Соответствие всем требованиям стандартизированной учетной политики</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Просто</h3>
+                    <p>Интуитивный мастер-опросник проведет вас через все этапы</p>
+                </div>
+            </div>
+
+            <div class="center-content">
+                <button class="btn" onclick="goToWizard()">Начать создание учетной политики</button>
+                <p class="team-name">Команда SPACE: Никита Мусиенко, Кондратьев Захар</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WIZARD PAGE -->
+    <div id="wizard" class="page">
+        <div class="container wizard-container">
+            <div class="step-info">
+                <h2 id="wizard-title">Мастер создания учетной политики</h2>
+                <span class="step-counter" id="step-counter">Шаг 1 из 6</span>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 16.67%"></div>
+            </div>
+
+            <div class="card">
+                <div class="error-message" id="error-message"></div>
+                
+                <div id="step-content"></div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="previousStep()">← Назад</button>
+                    <button class="btn" onclick="nextStep()">Далее →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT PAGE -->
+    <div id="result" class="page">
+        <div class="container wizard-container">
+            <div class="card result-card">
+                <div id="processing-state">
+                    <div class="spinner"></div>
+                    <h2>Формируется учетная политика...</h2>
+                    <p style="color: #6b7280; margin-top: 20px;">
+                        Пожалуйста, подождите. Система анализирует ваши ответы и генерирует документ.
+                    </p>
+                </div>
+
+                <div id="ready-state" style="display: none;">
+                    <div class="result-icon">✓</div>
+                    <h2>Учетная политика готова!</h2>
+                    <p style="color: #6b7280; margin: 20px 0 30px;">
+                        Ваш документ успешно сформирован и готов к загрузке
+                    </p>
+                    
+                    <button class="btn" onclick="downloadDocument()">📄 Скачать PDF</button>
+
+                    <div class="next-steps">
+                        <h3>Что дальше?</h3>
+                        <ul>
+                            <li>Проверьте содержимое документа</li>
+                            <li>Подпишите электронной подписью</li>
+                            <li>Направьте в централизованную бухгалтерию</li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="goToHome()" style="margin-top: 30px;">🏠 На главную</button>
+                </div>
+            </div>
+            
+            <p class="team-name">Команда SPACE: Никита Мусиенко, Кондратьев Захар</p>
+        </div>
+    </div>
+
+    <script>
+        // ====== STATE MANAGEMENT ======
+        const state = {
+            currentStep: 0,
+            sessionId: null,
+            answers: {
+                orgName: '',
+                taxSystem: '',
+                accountingType: '',
+                industry: '',
+                osAccounting: '',
+                mpzAccounting: ''
+            }
+        };
+
+        // ====== WIZARD STEPS CONFIGURATION ======
+        const steps = [
+            {
+                id: 'start',
+                title: 'Начало работы',
+                description: 'Укажите основную информацию об организации',
+                fields: [
+                    {
+                        type: 'text',
+                        name: 'orgName',
+                        label: 'Название организации',
+                        placeholder: 'Например: ГБУ Школа здоровья'
+                    },
+                    {
+                        type: 'radio',
+                        name: 'taxSystem',
+                        label: 'Система налогообложения',
+                        options: [
+                            { value: 'USN', label: 'УСН (Упрощенная система налогообложения)' },
+                            { value: 'OSN', label: 'ОСН (Общая система налогообложения)' },
+                            { value: 'ESHN', label: 'ЕСХН (Единый сельскохозяйственный налог)' }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'accounting-type',
+                title: 'Тип учета',
+                description: 'Выберите тип ведения учета',
+                fields: [
+                    {
+                        type: 'radio',
+                        name: 'accountingType',
+                        label: 'Тип учета',
+                        options: [
+                            { value: 'budget', label: 'Бюджетный учет' },
+                            { value: 'accounting', label: 'Бухгалтерский учет' }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'industry',
+                title: 'Отраслевая принадлежность',
+                description: 'Выберите отрасль деятельности организации',
+                fields: [
+                    {
+                        type: 'radio',
+                        name: 'industry',
+                        label: 'Отрасль',
+                        options: [
+                            { value: 'environment', label: 'Окружающая среда' },
+                            { value: 'housing', label: 'Жилищно-коммунальное хозяйство' },
+                            { value: 'education', label: 'Образование' },
+                            { value: 'transport', label: 'Транспорт' },
+                            { value: 'road', label: 'Дорожное хозяйство' },
+                            { value: 'none', label: 'Без отраслевых особенностей' }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'os-accounting',
+                title: 'Учет основных средств',
+                description: 'Выберите метод начисления амортизации',
+                fields: [
+                    {
+                        type: 'radio',
+                        name: 'osAccounting',
+                        label: 'Метод амортизации',
+                        options: [
+                            { value: 'linear', label: 'Линейный метод' },
+                            { value: 'reducing-balance', label: 'Метод уменьшаемого остатка' }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'mpz-accounting',
+                title: 'Учет МПЗ',
+                description: 'Метод оценки материально-производственных запасов',
+                fields: [
+                    {
+                        type: 'radio',
+                        name: 'mpzAccounting',
+                        label: 'Метод оценки МПЗ',
+                        options: [
+                            { value: 'fifo', label: 'ФИФО (Первым пришел - первым ушел)' },
+                            { value: 'average', label: 'По средней стоимости' }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'review',
+                title: 'Проверка данных',
+                description: 'Убедитесь что все данные введены корректно',
+                fields: []
+            }
+        ];
+
+        // ====== BACKEND SIMULATION (имитация 1С) ======
+        class MockBackend {
+            constructor() {
+                this.sessions = new Map();
+                this.processingQueue = new Map();
+            }
+
+            // Создание сессии (имитация POST /api/wizard/start)
+            createSession(orgName, taxSystem) {
+                const sessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+                const session = {
+                    sessionId,
+                    orgName,
+                    taxSystem,
+                    createdAt: new Date().toISOString(),
+                    status: 'active',
+                    steps: []
+                };
+                
+                this.sessions.set(sessionId, session);
+                console.log('[1С Backend] Создана сессия:', sessionId);
+                return { sessionId };
+            }
+
+            // Сохранение шага (имитация POST /api/wizard/step)
+            saveStep(sessionId, step, answer) {
+                const session = this.sessions.get(sessionId);
+                if (!session) {
+                    throw new Error('Session not found');
+                }
+
+                session.steps.push({ step, answer, timestamp: new Date().toISOString() });
+                console.log('[1С Backend] Сохранен шаг:', step, '=', answer);
+                
+                return { status: 'ok' };
+            }
+
+            // Запуск генерации документа (имитация POST /api/wizard/finish)
+            startGeneration(sessionId) {
+                const session = this.sessions.get(sessionId);
+                if (!session) {
+                    throw new Error('Session not found');
+                }
+
+                session.status = 'processing';
+                console.log('[1С Backend] Запущена генерация документа для сессии:', sessionId);
+
+                // Имитация обработки в 1С (2 секунды)
+                setTimeout(() => {
+                    this.completeGeneration(sessionId);
+                }, 2000);
+
+                return { status: 'processing' };
+            }
+
+            // Завершение генерации
+            completeGeneration(sessionId) {
+                const session = this.sessions.get(sessionId);
+                if (session) {
+                    session.status = 'ready';
+                    session.documentUrl = `/documents/policy-${sessionId}.pdf`;
+                    session.completedAt = new Date().toISOString();
+                    console.log('[1С Backend] Документ готов:', session.documentUrl);
+                }
+            }
+
+            // Проверка статуса (имитация GET /api/result/{sessionId})
+            getStatus(sessionId) {
+                const session = this.sessions.get(sessionId);
+                if (!session) {
+                    throw new Error('Session not found');
+                }
+
+                if (session.status === 'ready') {
+                    return {
+                        status: 'ready',
+                        downloadUrl: session.documentUrl
+                    };
+                }
+
+                return { status: 'processing' };
+            }
+
+            // Генерация PDF (имитация создания документа в 1С)
+            generatePDF(sessionId) {
+                const session = this.sessions.get(sessionId);
+                if (!session) return;
+
+                console.log('[1С Backend] Генерация PDF-формуляра...');
+                console.log('Организация:', session.orgName);
+                console.log('Параметры:', session.steps);
+                
+                // В реальной системе здесь был бы вызов процедур 1С для создания PDF
+                return true;
+            }
+        }
+
+        const backend = new MockBackend();
+
+        // ====== NAVIGATION ======
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function goToHome() {
+            showPage('home');
+            resetWizard();
+        }
+
+        function goToWizard() {
+            showPage('wizard');
+            renderStep();
+        }
+
+        function goToResult() {
+            showPage('result');
+            
+            // Создаем сессию в backend
+            if (!state.sessionId) {
+                const response = backend.createSession(state.answers.orgName, state.answers.taxSystem);
+                state.sessionId = response.sessionId;
+            }
+
+            // Отправляем все ответы
+            Object.keys(state.answers).forEach(key => {
+                if (state.answers[key]) {
+                    backend.saveStep(state.sessionId, key, state.answers[key]);
+                }
+            });
+
+            // Запускаем генерацию
+            backend.startGeneration(state.sessionId);
+
+            // Показываем процесс
+            document.getElementById('processing-state').style.display = 'block';
+            document.getElementById('ready-state').style.display = 'none';
+
+            // Проверяем статус
+            checkStatus();
+        }
+
+        function checkStatus() {
+            if (!state.sessionId) return;
+
+            const status = backend.getStatus(state.sessionId);
+            
+            if (status.status === 'ready') {
+                document.getElementById('processing-state').style.display = 'none';
+                document.getElementById('ready-state').style.display = 'block';
+            } else {
+                setTimeout(checkStatus, 500);
+            }
+        }
+
+        function downloadDocument() {
+            // В реальной системе здесь был бы download PDF
+            alert('📄 В реальной системе здесь будет скачан PDF-документ с учетной политикой, сгенерированный 1С.\n\nДокумент будет содержать:\n- Все выбранные параметры\n- Отраслевые блоки\n- Электронную подпись\n\nСессия: ' + state.sessionId);
+        }
+
+        // ====== WIZARD LOGIC ======
+        function renderStep() {
+            const step = steps[state.currentStep];
+            const stepContent = document.getElementById('step-content');
+            
+            document.getElementById('step-counter').textContent = `Шаг ${state.currentStep + 1} из ${steps.length}`;
+            document.getElementById('progress-fill').style.width = `${((state.currentStep + 1) / steps.length) * 100}%`;
+
+            if (step.id === 'review') {
+                renderReviewStep();
+                return;
+            }
+
+            let html = `<h3 style="font-size: 24px; color: #1f2937; margin-bottom: 10px;">${step.title}</h3>`;
+            html += `<p style="color: #6b7280; margin-bottom: 30px;">${step.description}</p>`;
+
+            step.fields.forEach(field => {
+                html += `<div class="form-group">`;
+                html += `<label class="form-label">${field.label}</label>`;
+
+                if (field.type === 'text') {
+                    html += `<input type="text" class="form-input" id="${field.name}" 
+                             value="${state.answers[field.name] || ''}" 
+                             placeholder="${field.placeholder}"
+                             onchange="updateAnswer('${field.name}', this.value)">`;
+                } else if (field.type === 'radio') {
+                    html += `<div class="radio-group">`;
+                    field.options.forEach(option => {
+                        const checked = state.answers[field.name] === option.value ? 'checked' : '';
+                        const selectedClass = checked ? 'selected' : '';
+                        html += `
+                            <label class="radio-option ${selectedClass}" onclick="selectRadio('${field.name}', '${option.value}')">
+                                <input type="radio" name="${field.name}" value="${option.value}" ${checked}>
+                                <span>${option.label}</span>
+                            </label>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
+            });
+
+            stepContent.innerHTML = html;
+        }
+
+        function renderReviewStep() {
+            const stepContent = document.getElementById('step-content');
+            
+            const labels = {
+                orgName: 'Организация',
+                taxSystem: 'Система налогообложения',
+                accountingType: 'Тип учета',
+                industry: 'Отрасль',
+                osAccounting: 'Амортизация ОС',
+                mpzAccounting: 'Оценка МПЗ'
+            };
+
+            let html = `<h3 style="font-size: 24px; color: #1f2937; margin-bottom: 10px;">Проверка данных</h3>`;
+            html += `<p style="color: #6b7280; margin-bottom: 30px;">Убедитесь что все данные введены корректно</p>`;
+            
+            html += `<div style="background: #f9fafb; padding: 20px; border-radius: 10px;">`;
+            
+            Object.keys(state.answers).forEach(key => {
+                if (state.answers[key]) {
+                    html += `<div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">`;
+                    html += `<strong style="color: #6b7280;">${labels[key]}:</strong><br>`;
+                    html += `<span style="color: #1f2937; font-size: 18px;">${state.answers[key]}</span>`;
+                    html += `</div>`;
+                }
+            });
+            
+            html += `</div>`;
+            
+            stepContent.innerHTML = html;
+        }
+
+        function updateAnswer(field, value) {
+            state.answers[field] = value;
+        }
+
+        function selectRadio(field, value) {
+            state.answers[field] = value;
+            renderStep();
+        }
+
+        function validateStep() {
+            const step = steps[state.currentStep];
+            const errorMsg = document.getElementById('error-message');
+            
+            for (let field of step.fields) {
+                if (!state.answers[field.name]) {
+                    errorMsg.textContent = `Пожалуйста, заполните поле: ${field.label}`;
+                    errorMsg.classList.add('show');
+                    return false;
+                }
+            }
+            
+            errorMsg.classList.remove('show');
+            return true;
+        }
+
+        function nextStep() {
+            if (!validateStep()) return;
+
+            if (state.currentStep < steps.length - 1) {
+                state.currentStep++;
+                renderStep();
+            } else {
+                goToResult();
+            }
+        }
+
+        function previousStep() {
+            if (state.currentStep > 0) {
+                state.currentStep--;
+                renderStep();
+            } else {
+                goToHome();
+            }
+        }
+
+        function resetWizard() {
+            state.currentStep = 0;
+            state.sessionId = null;
+            state.answers = {
+                orgName: '',
+                taxSystem: '',
+                accountingType: '',
+                industry: '',
+                osAccounting: '',
+                mpzAccounting: ''
+            };
+        }
+
+        // ====== INITIALIZATION ======
+        console.log('SPACE-Конструктор: Цифровая Учётная Политика');
+        console.log('Команда SPACE: Никита Мусиенко, Кондратьев Захар');
+        console.log('Backend simulation активен. Все данные обрабатываются локально.');
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+СРОЧНО! Скопируйте это в файл .replit:
+
+modules = ["nodejs-20"]
+
+run = "npm run dev"
+
+[nix]
+channel = "stable-25_05"
+
+[deployment]
+run = ["sh", "-c", "npm run dev"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 39739
+externalPort = 3000
+
+КАК СДЕЛАТЬ:
+1. Откройте файл .replit (слева в файлах)
+2. Вставьте код выше
+3. Сохраните (Ctrl+S)
+4. Нажмите Run
+
+ГОТОВО!
